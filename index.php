@@ -12,10 +12,13 @@ require_once('credentials.php');
 
 $api = new TwitterAPI($credentials);
 
-$name = $_GET['name'];
+if(isset($_GET['name']))
+    $name = "screen_name=".$_GET['name'];
+else
+    $name = "user_id=".explode('-', $credentials["accessToken"])[0];
 
 $url = "https://api.twitter.com/1.1/users/show.json";
-$field = "?screen_name=$name";
+$field = "?$name";
 
 $user = $api->query($url, "GET", $field);
 $userID = $user['id'];
