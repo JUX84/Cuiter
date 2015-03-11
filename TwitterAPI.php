@@ -14,7 +14,7 @@ class TwitterAPI {
         }
     }
 
-    private function query($url, $method, $fields) {
+    public function query($url, $method, $fields) {
         $oauth = array(
             'oauth_consumer_key' => $this->consumerKey,
             'oauth_nonce' => time(),
