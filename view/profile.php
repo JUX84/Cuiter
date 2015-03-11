@@ -35,7 +35,7 @@
         <?php
         foreach($tweets as $tweet) {
         ?>
-            <h4><?=$tweet['user']['name']?> <span class="date">(<?=date('d/m/Y, H:i:s', strtotime($tweet['created_at']))?>)</span></h4>
+            <h4><a href="<?=$tweet['user']['screen_name']?>"><?=$tweet['user']['name']?></a> <span class="date">(<?=date('d/m/Y, H:i:s', strtotime($tweet['created_at']))?>)</span></h4>
             <p<?=(substr($tweet['text'], 0, 2) == 'RT' ? ' class="retweet"' : '')?>><?=Controller::processTweet($tweet)?></p>
         <?php
         }
