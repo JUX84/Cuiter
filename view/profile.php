@@ -34,9 +34,6 @@
     <div class="col-lg-12">
         <?php
         foreach($tweets as $tweet) {
-            $rt = false;
-            if(subtr($tweet, 0, 2) == 'RT')
-                $rt = true;
         ?>
             <h4><?=$tweet['user']['name']?> <span class="date">(<?=date('d/m/Y, H:i:s', strtotime($tweet['created_at']))?>)</span></h4>
             <p<?=(subtr($tweet, 0, 2) == 'RT' ? ' class="rt"' : '')?>><?=Controller::processTweet($tweet['text'])?></p>
