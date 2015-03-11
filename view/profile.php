@@ -33,9 +33,6 @@
 <div class="row marketing">
     <div class="col-lg-12">
         <?php
-        echo '<pre>';
-        var_dump($tweets);
-        echo '</pre>';
         foreach($tweets as $tweet) {
         ?>
             <h4><?=$tweet['user']['name']?> <span class="date">(<?=date('d/m/Y, H:i:s', strtotime($tweet['created_at']))?>)</span></h4>
