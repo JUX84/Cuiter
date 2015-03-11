@@ -68,6 +68,10 @@ body {
     color: grey;
 }
 
+p .rt {
+    background-color: #e5e5e5;
+}
+
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
     /* Remove the padding we set earlier */
