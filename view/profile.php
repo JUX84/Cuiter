@@ -36,7 +36,7 @@
         foreach($tweets as $tweet) {
         ?>
             <h4><?=$tweet['user']['name']?> <span class="date">(<?=date('d/m/Y, H:i:s', strtotime($tweet['created_at']))?>)</span></h4>
-            <p<?=(substr($tweet, 0, 2) == 'RT' ? ' class="rt"' : '')?>><?=Controller::processTweet($tweet['text'])?></p>
+            <p<?=(substr($tweet, 0, 2) == 'RT' ? ' class="retweet"' : '')?>><?=Controller::processTweet($tweet['text'])?></p>
         <?php
         }
         ?>
