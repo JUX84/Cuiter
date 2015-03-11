@@ -12,7 +12,7 @@
     }
     ?>
     <h1><?=$user['name']?></h1>
-    <h3><a href="#">@<?=$user['screen_name']?></a></h3>
+    <h3><a href="/?name=<?=$user['screen_name']?>">@<?=$user['screen_name']?></a></h3>
     <?php
     if(isset($user['description']) && !empty($user['description'])) {
         ?>
@@ -23,7 +23,7 @@
     <?php
     if(isset($user['url']) && !empty($user['url'])) {
         ?>
-        <p><a class="btn btn-lg btn-success" href="#" role="button"><?=$user['url']?></a></p>
+        <p><a class="btn btn-lg btn-success" href="<?=$user['status']['urls']['url']?>" role="button"><?=$user['status']['urls']['expanded_url']?></a></p>
     <?php
     }
     ?>
