@@ -1,4 +1,9 @@
-<div class="jumbotron" style="background: url(<?=$user['profile_background_image_url']?>) no-repeat;">
+<div class="jumbotron"
+     style="
+         background: url(<?=$user['profile_background_image_url']?>) no-repeat;
+         background-color: #<?=$user['profile_background_color']?>;
+         color: #<?=$user['profile_text_color']?>;
+         ">
     <img src="<?=$user['profile_image_url']?>" />
     <h1><?=$user['name']?></h1>
     <p class="lead"><?=$user['description']?></p>
