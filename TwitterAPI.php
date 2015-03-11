@@ -63,3 +63,4 @@ class TwitterAPI {
         return json_decode($json, true);
     }
 }
+?>
