@@ -23,7 +23,14 @@ class TwitterAPI {
             'oauth_timestamp' => time(),
             'oauth_version' => '1.0'
         );
-        $oauth += $fields;
+        $explodedFields = explode('&', substr($fields, 1));
+        $fieldsArray = array();
+        foreach($explodedFields as $field) {
+            $explodedField = explode('=', $field);
+            $fieldsArray[$explodedField[0]] = $explodedField[1];
+        }
+        if($method == "GET")
+            $oauth += $fieldsArray;
         ksort($oauth);
         $tmp = array();
         $values = array();
@@ -38,10 +45,14 @@ class TwitterAPI {
         $options = array(
             CURLOPT_HTTPHEADER => $header,
             CURLOPT_HEADER => false,
-            CURLOPT_URL => $url.$fields,
+            CURLOPT_URL => $url,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_TIMEOUT => 10
         );
+        if($method == "GET")
+            $options[CURLOPT_URL] .= '?'.$fields;
+        else
+            $options[CURLOPT_POSTFIELDS] = $fieldsArray;
         $feed = curl_init();
         curl_setopt_array($feed, $options);
         $json = curl_exec($feed);
