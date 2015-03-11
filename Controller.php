@@ -6,16 +6,25 @@ class Controller
     {
         $text = $tweet['text'];
         $text = str_replace('RT', '<span class="rt">RT</span>', $text);
-        foreach($tweet['entities'] as $entity) {
-            foreach($entity['urls'] as $url) {
-                var_dump($url);
-                $text = substr($text, $url['url'], '<a href="' . $url['url'] . '">' . $url['display_url'] . '</a>', $url['indices'][1] - $url['indices'][1]);
-            }
-            /*foreach($entity['hashtags'] as $hashtag)
-                $tweet = substr($tweet, '#'.$hashtag['url'], $hashtag['indices'][0], $hashtag['indices'][1]-$hashtag['indices'][1]);*/
-            /*foreach($entity['user_mentions'] as $user)
-                $tweet = substr($tweet, '@'.$user['screen_name'], '<a href="'.$user['screen_name'].'">@'.$user['screen_name'].'</a>', $user['indices'][1]-$user['indices'][1]);*/
-        }
+        $text = preg_replace_callback(
+            '/@[A-Z0-9_]*/i',
+            function ($matches) {
+                return '<a href="/?name=' . substr($matches[0], 1) . '">' . $matches[0] . '</a>';
+            },
+            $text
+        );
+        $text = preg_replace_callback(
+            '/#[A-Z0-9_]*/i',
+            function ($matches) {
+                return '<a href="/?tag=' . substr($matches[0], 1) . '">' . $matches[0] . '</a>';
+            },
+            $text
+        );
+        $text = preg_replace(
+            '/((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/',
+            '<a href="$0">$0</a>',
+            $text
+        );
         return $text;
     }
 }
