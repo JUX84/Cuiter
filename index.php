@@ -12,16 +12,16 @@ require_once('credentials.php');
 
 $api = new TwitterAPI($credentials);
 
-$url = "http://api.twitter.com/1.1/users/show.json";
+$url = "https://api.twitter.com/1.1/users/show.json";
 $field = "?screen_name=NASA";
 
 $user = $api->query($url, "GET", $field);
 $userID = $user['id'];
 
-$url = "http://api.twitter.com/1.1/statuses/user_timeline.json";
+$url = "https://api.twitter.com/1.1/statuses/user_timeline.json";
 $field = "?user_id=$userID&count=10";
 
-$user = $api->query($url, "GET", $field);
+$tweets = $api->query($url, "GET", $field);
 
 $view = "profile";
 
