@@ -36,7 +36,7 @@
         foreach($tweets as $tweet) {
         ?>
             <h4><?=$tweet['user']['name']?></h4>
-            <p><?=$tweet['text']?></p>
+            <p><?=Controller::processTweet($tweet['text'])?></p>
         <?php
         }
         ?>
