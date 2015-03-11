@@ -1,6 +1,7 @@
 <?php
 
 require_once('TwitterAPI.php');
+require_once('Controller.php');
 
 $credentials = array();
 $credentials["consumerKey"] = "";
