@@ -13,7 +13,8 @@ require_once('credentials.php');
 $api = new TwitterAPI($credentials);
 
 $url = "https://api.twitter.com/1.1/users/show.json";
-$field = "?screen_name=NASA";
+$path = explode('/', substring($_SERVER["REQUEST_URI"],1))[0];
+$field = "?screen_name=$path";
 
 $user = $api->query($url, "GET", $field);
 $userID = $user['id'];
