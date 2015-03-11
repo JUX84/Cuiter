@@ -10,7 +10,7 @@ class Controller
         $tweet = str_replace('RT', '<span class="rt">RT</span>', $tweet);
         foreach($tweets['entities'] as $entity) {
             foreach($entity['urls'] as $url)
-                $tweet = substr($tweet, $url['url'], '<a href="'.$url['url'][0].'">'.$url['display_url'].'</a>', $url['indices'][1]-$url['indices'][1]);
+                $tweet = substr($tweet, $url['url'], '<a href="'.$url['url'].'">'.$url['display_url'].'</a>', $url['indices'][1]-$url['indices'][1]);
             /*foreach($entity['hashtags'] as $hashtag)
                 $tweet = substr($tweet, '#'.$hashtag['url'], $hashtag['indices'][0], $hashtag['indices'][1]-$hashtag['indices'][1]);*/
             /*foreach($entity['user_mentions'] as $user)
