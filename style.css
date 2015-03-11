@@ -59,6 +59,11 @@ body {
     margin-top: 28px;
 }
 
+.rt {
+    text-decoration: underline;
+    font-weight: bold;
+}
+
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
     /* Remove the padding we set earlier */

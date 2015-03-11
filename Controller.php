@@ -4,7 +4,7 @@ class Controller
 {
     static function processTweet($tweet)
     {
-        $tweet = str_replace('RT', '<b>RT</b>', $tweet);
+        $tweet = str_replace('RT', '<span class="rt">RT</span>', $tweet);
         $tweet = preg_replace_callback(
             '/@[A-Z0-9_]*/i',
             function ($matches) {
