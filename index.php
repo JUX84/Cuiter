@@ -16,9 +16,11 @@ $api = new TwitterAPI($credentials);
 if(isset($_GET['name'])) {
     $name = "screen_name=" . $_GET['name'];
     $statuses = "https://api.twitter.com/1.1/statuses/user_timeline.json";
+    $field = "?user_id=$userID&count=10";
 } else {
     $name = "user_id=".explode('-', $credentials["accessToken"])[0];
     $statuses = "https://api.twitter.com/1.1/statuses/home_timeline.json";
+    $field = "?count=10";
 }
 
 $profile = "https://api.twitter.com/1.1/users/show.json";
@@ -26,9 +28,6 @@ $field = "?$name";
 
 $user = $api->query($profile, "GET", $field);
 $userID = $user['id'];
-
-
-$field = "?user_id=$userID&count=10";
 
 $tweets = $api->query($statuses, "GET", $field);
 
