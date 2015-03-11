@@ -2,29 +2,33 @@
 
 class Controller
 {
-	public static function profile($screen_name = '') {
-		$profile = "https://api.twitter.com/1.1/users/show.json";
-		if (empty($screen_name))
-			$field = "?user_id=".TwitterAPI::getUserID();
-		else
-			$field = "?screen_name=$screen_name";
-		return TwitterAPI::query($profile, 'GET', $field); 
-	}
+    public static function profile($screen_name = '')
+    {
+        $profile = "https://api.twitter.com/1.1/users/show.json";
+        if (empty($screen_name))
+            $field = "?user_id=" . TwitterAPI::getUserID();
+        else
+            $field = "?screen_name=$screen_name";
+        return TwitterAPI::query($profile, 'GET', $field);
+    }
 
-	public static function home() {
-		$tweets = "https://api.twitter.com/1.1/statuses/home_timeline.json";
-		$field = "?count=10";
-		return TwitterAPI::query($tweets, 'GET', $field);
-	}
+    public static function home()
+    {
+        $tweets = "https://api.twitter.com/1.1/statuses/home_timeline.json";
+        $field = "?count=10";
+        return TwitterAPI::query($tweets, 'GET', $field);
+    }
 
-	public static function tweets($userID) {
-		$tweets = "https://api.twitter.com/1.1/statuses/user_timeline.json";
-		$field = "?user_id=$userID&count=10";
-		return TwitterAPI::query($tweets, 'GET', $field);
-	}
+    public static function tweets($userID)
+    {
+        $tweets = "https://api.twitter.com/1.1/statuses/user_timeline.json";
+        $field = "?user_id=$userID&count=10";
+        return TwitterAPI::query($tweets, 'GET', $field);
+    }
 
-	public static function search($query, $type) {
-	}
+    public static function search($query, $type)
+    {
+    }
 
     public static function processTweet(&$tweet)
     {
