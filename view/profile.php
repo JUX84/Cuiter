@@ -23,7 +23,7 @@
     <?php
     if(isset($user['url']) && !empty($user['url'])) {
         ?>
-        <p><a class="btn btn-lg btn-success" href="<?=$user['status']['urls']['url']?>" role="button"><?=$user['status']['urls']['expanded_url']?></a></p>
+        <p><a class="btn btn-lg btn-success" href="<?=$user['entities']['url']['urls']['url']?>" role="button"><?=$user['entities']['url']['urls']['expanded_url']?></a></p>
     <?php
     }
     ?>
