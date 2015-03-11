@@ -73,6 +73,20 @@ body {
     padding: 10px;
 }
 
+.search {
+	padding: 9px;
+	width: 80px;
+	transition: width .2s ease-in;
+}
+
+.search:hover {
+	width: 160px;
+}
+
+.search:focus {
+	width: 160px;
+}
+
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
     /* Remove the padding we set earlier */

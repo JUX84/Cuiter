@@ -1,36 +1,53 @@
 <?php
-
+ini_set('display_errors',1);
+error_reporting(E_ALL);
 require_once('TwitterAPI.php');
 require_once('Controller.php');
 
 $credentials = array();
-$credentials["consumerKey"] = "";
-$credentials["consumerSecret"] = "";
-$credentials["accessToken"] = "";
-$credentials["accessTokenSecret"] = "";
+$credentials['consumerKey'] = '';
+$credentials['consumerSecret'] = '';
+$credentials['accessToken'] = '';
+$credentials['accessTokenSecret'] = '';
 
 require_once('credentials.php');
 
-$api = new TwitterAPI($credentials);
+TwitterAPI::init($credentials);
 
-if(isset($_GET['name'])) {
-    $name = "screen_name=" . $_GET['name'];
-    $statuses = "https://api.twitter.com/1.1/statuses/user_timeline.json";
-    $field = "?user_id=$userID&count=10";
+if(!isset($_GET['action'])) {
+	$view = 'profile';
+	$user = Controller::profile();
+	$tweets = Controller::home();
 } else {
-    $name = "user_id=".explode('-', $credentials["accessToken"])[0];
-    $statuses = "https://api.twitter.com/1.1/statuses/home_timeline.json";
-    $field = "?count=10";
+	switch($_GET['action']) {
+	case 'profile':
+		if(!isset($_GET['name'])) {
+			$view = 'error';
+			$error = "URI seems wrong...";
+			break;
+		}
+		$view = 'profile';
+		$user = Controller::profile($_GET['name']);
+		$tweets = Controller::tweets($user['id']);
+		break;
+	/*case 'search':
+		if(!isset($_GET['q'])) {
+			$view = 'error';
+			$error = "URI seems wrong...";
+			break;
+		}
+		$view = 'search';
+		$type = 'all';
+		if (isset($_GET['type']))
+			$type = $_GET['type'];
+		$results = Controller::search($_GET['q'], $type);
+		break;*/
+	default:
+		$view = 'profile';
+		$user = Controller::profile();
+		$tweets = Controller::home();
+		break;
+	}
 }
-
-$profile = "https://api.twitter.com/1.1/users/show.json";
-$field = "?$name";
-
-$user = $api->query($profile, "GET", $field);
-$userID = $user['id'];
-
-$tweets = $api->query($statuses, "GET", $field);
-
-$view = "profile";
 
 include('layout.php');
