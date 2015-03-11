@@ -7,7 +7,7 @@ class TwitterAPI {
     private $accessTokenSecret;
 
     public function __construct($APICredentials) {
-        if($APICredentials == null || sizeof($APICredentials) != 4 || !isset($APICredentials["consumerKey"], $APICredentials["consumerSecret"], $APICredentials["acessToken"], $APICredentials["accessTokenSecret"]))
+        if($APICredentials == null || sizeof($APICredentials) != 4 || !isset($APICredentials["consumerKey"], $APICredentials["consumerSecret"], $APICredentials["accessToken"], $APICredentials["accessTokenSecret"]))
             return null;
         foreach($APICredentials as $key => $value) {
             $$key = $value;
@@ -15,6 +15,8 @@ class TwitterAPI {
     }
 
     public function query($url, $method, $fields) {
+        if(!isset($this->consumerKey, $this->consumerSecret, $this->accessToken, $this->accessTokenSecret))
+            return json_encode("error", "API configuration failed");
         $oauth = array(
             'oauth_consumer_key' => $this->consumerKey,
             'oauth_nonce' => time(),
