@@ -42,7 +42,7 @@ class TwitterAPI {
         }
         $base = $method.'&'.rawurlencode($url).'&'.rawurlencode(implode('&', $tmp));
         $compositeKey = rawurlencode($this->consumerSecret).'&'.rawurlencode($this->accessTokenSecret);
-        $oauth['oauth_signature'] = base64_encode(hash_hmac('sha1', $base, $compositeKey, true));
+        $values[] = 'oauth_signature="'.rawurlencode(base64_encode(hash_hmac('sha1', $base, $compositeKey, true))).'"';
         $header = array('Authorization: OAuth '.implode(', ', $values), 'Expect:');
         $options = array(
             CURLOPT_HTTPHEADER => $header,
@@ -55,10 +55,10 @@ class TwitterAPI {
             $options[CURLOPT_URL] .= $fields;
         else
             $options[CURLOPT_POSTFIELDS] = $fieldsArray;
-        $feed = curl_init();
-        curl_setopt_array($feed, $options);
-        $json = curl_exec($feed);
-        curl_close($feed);
+        $curl = curl_init();
+        curl_setopt_array($curl, $options);
+        $json = curl_exec($curl);
+        curl_close($curl);
 
         return json_decode($json, true);
     }
