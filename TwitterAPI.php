@@ -10,7 +10,7 @@ class TwitterAPI {
         if($APICredentials == null || sizeof($APICredentials) != 4 || !isset($APICredentials["consumerKey"], $APICredentials["consumerSecret"], $APICredentials["accessToken"], $APICredentials["accessTokenSecret"]))
             return null;
         foreach($APICredentials as $key => $value) {
-            $$key = $value;
+            $this->$key = $value;
         }
     }
 
@@ -52,7 +52,7 @@ class TwitterAPI {
             CURLOPT_TIMEOUT => 10
         );
         if($method == "GET")
-            $options[CURLOPT_URL] .= '?'.$fields;
+            $options[CURLOPT_URL] .= $fields;
         else
             $options[CURLOPT_POSTFIELDS] = $fieldsArray;
         $feed = curl_init();
