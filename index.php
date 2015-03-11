@@ -13,21 +13,24 @@ require_once('credentials.php');
 
 $api = new TwitterAPI($credentials);
 
-if(isset($_GET['name']))
-    $name = "screen_name=".$_GET['name'];
-else
+if(isset($_GET['name'])) {
+    $name = "screen_name=" . $_GET['name'];
+    $statuses = "https://api.twitter.com/1.1/statuses/user_timeline.json";
+} else {
     $name = "user_id=".explode('-', $credentials["accessToken"])[0];
+    $statuses = "https://api.twitter.com/1.1/statuses/home_timeline.json";
+}
 
-$url = "https://api.twitter.com/1.1/users/show.json";
+$profile = "https://api.twitter.com/1.1/users/show.json";
 $field = "?$name";
 
-$user = $api->query($url, "GET", $field);
+$user = $api->query($profile, "GET", $field);
 $userID = $user['id'];
 
-$url = "https://api.twitter.com/1.1/statuses/user_timeline.json";
+
 $field = "?user_id=$userID&count=10";
 
-$tweets = $api->query($url, "GET", $field);
+$tweets = $api->query($statuses, "GET", $field);
 
 $view = "profile";
 
