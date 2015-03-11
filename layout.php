@@ -23,7 +23,10 @@
         <nav>
             <ul class="nav nav-pills pull-right">
                 <li role="presentation" class="active"><a href="/">Home</a></li>
-                <li role="presentation"><form method="get" action="/"><input type="hidden" name="action" value="search" /><input class="search" type="text" name="q" placeholder="Search" /></form></li>
+                <li role="presentation">
+                    <form method="get" action="/"><input type="hidden" name="action" value="search"/><input
+                            class="search" type="text" name="q" placeholder="Search"/></form>
+                </li>
                 <li role="presentation"><a href="#">Settings</a></li>
             </ul>
         </nav>
@@ -31,14 +34,15 @@
     </div>
 
     <?php
-        include('view/'.$view.'.php');
+    include('view/' . $view . '.php');
     ?>
 
     <footer class="footer">
         <p>Cuiter 2015</p>
     </footer>
 
-</div> <!-- /container -->
+</div>
+<!-- /container -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 </body>
 </html>
