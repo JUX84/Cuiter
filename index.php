@@ -15,39 +15,39 @@ require_once('credentials.php');
 TwitterAPI::init($credentials);
 
 if (!isset($_GET['action'])) {
-    $view = 'profile';
-    $user = Controller::profile();
-    $tweets = Controller::home();
+	$view = 'profile';
+	$user = Controller::profile();
+	$tweets = Controller::home();
 } else {
-    switch ($_GET['action']) {
-        case 'profile':
-            if (!isset($_GET['name'])) {
-                $view = 'error';
-                $error = "URI seems wrong...";
-                break;
-            }
-            $view = 'profile';
-            $user = Controller::profile($_GET['name']);
-            $tweets = Controller::tweets($user['id']);
-            break;
-        /*case 'search':
-            if(!isset($_GET['q'])) {
-                $view = 'error';
-                $error = "URI seems wrong...";
-                break;
-            }
-            $view = 'search';
-            $type = 'all';
-            if (isset($_GET['type']))
-                $type = $_GET['type'];
-            $results = Controller::search($_GET['q'], $type);
-            break;*/
-        default:
-            $view = 'profile';
-            $user = Controller::profile();
-            $tweets = Controller::home();
-            break;
-    }
+	switch ($_GET['action']) {
+		case 'profile':
+			if (!isset($_GET['name'])) {
+				$view = 'error';
+				$error = "URI seems wrong...";
+				break;
+			}
+			$view = 'profile';
+			$user = Controller::profile($_GET['name']);
+			$tweets = Controller::tweets($user['id']);
+			break;
+		/*case 'search':
+			if(!isset($_GET['q'])) {
+				$view = 'error';
+				$error = "URI seems wrong...";
+				break;
+			}
+			$view = 'search';
+			$type = 'all';
+			if (isset($_GET['type']))
+				$type = $_GET['type'];
+			$results = Controller::search($_GET['q'], $type);
+			break;*/
+		default:
+			$view = 'profile';
+			$user = Controller::profile();
+			$tweets = Controller::home();
+			break;
+	}
 }
 
 include('layout.php');
