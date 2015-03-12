@@ -24,7 +24,7 @@
 			<ul class="nav nav-pills pull-right">
 				<li role="presentation" class="active"><a href="/">Home</a></li>
 				<li role="presentation">
-					<form method="get" action="/"><input type="hidden" name="action" value="search"/><input
+					<form method="get"><input type="hidden" name="action" value="search"/><input
 							class="search" type="text" name="q" placeholder="Search"/></form>
 				</li>
 				<li role="presentation"><a href="#">Settings</a></li>

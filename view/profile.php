@@ -2,7 +2,7 @@
      style="
 	     background: url(<?= $user['profile_background_image_url'] ?>) no-repeat;
 	     background-color: #<?= $user['profile_background_color'] ?>;
-	     color: #<?= $user['profile_text_color'] ?>;
+	     color: white;
 	     ">
 	<?php
 	if (isset($user['profile_image_url']) && !empty($user['profile_image_url'])) {
@@ -29,17 +29,39 @@
 	<?php
 	}
 	?>
-
+	Tweets : <?= $user['statuses_count'] ?> | Following : <?= $user['friends_count'] ?> | Followers : <?= $user['followers_count'] ?>
 </div>
 
 <div class="row marketing">
 	<div class="col-lg-12">
 		<?php
-		foreach ($tweets as $tweet) {
-			?>
-			<h4><a href="/?action=profile&name=<?= $tweet['user']['screen_name'] ?>"><?= $tweet['user']['name'] ?></a>
+			if ($user['id'] == TwitterAPI::getUserID()) {
+		?>
+		<div class="tweet">
+			<img style="padding-right: 5px;" src="<?= $user['profile_image_url'] ?>" />
+			<form style="display: inline;" method="get">
+			<input type="hidden" name="action" value="status" />
+			<input type="hidden" name="referer" value="<?= $_SERVER['REQUEST_URI'] ?>" />
+			<input class="input" type="text" name="content" placeholder="What's happening" />
+			</form>
+		</div>
+<?php
+			}
+	foreach ($tweets as $tweet) {
+		/*echo '<pre>';
+		var_dump($tweet);
+		echo '</pre>';*/
+		$class = '';
+		$rt = $tweet['retweeted'];
+		$fav = $tweet['favorited'];
+		if($fav)
+			$class = ' class="favorite"';
+		else if ($rt)
+			$class = ' class="retweet"';
+		?>
+			<h4><img style="padding-right: 10px;" src="<?= $tweet['user']['profile_image_url'] ?>" /><a href="/?action=profile&name=<?= $tweet['user']['screen_name'] ?>"><?= $tweet['user']['name'] ?></a>
 				<span class="date">(<?= date('d/m/Y, H:i:s', strtotime($tweet['created_at'])) ?>)</span></h4>
-			<p<?= (substr($tweet['text'], 0, 2) == 'RT' ? ' class="retweet"' : '') ?>><?= Controller::processTweet($tweet) ?></p>
+			<p<?= $class ?>><?= Controller::processTweet($tweet) ?></p>
 		<?php
 		}
 		?>
