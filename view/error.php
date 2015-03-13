@@ -4,6 +4,6 @@
 
 <div class="row marketing">
 	<div class="col-lg-12">
-		<h4>Something went wrong...</h4>
+	<h4><?= isset($error) ? $error : "Something wrong happened..." ?></h4>
 	</div>
 </div>

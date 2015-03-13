@@ -17,7 +17,17 @@ TwitterAPI::init($credentials);
 if (!isset($_GET['action'])) {
 	$view = 'profile';
 	$user = Controller::profile();
+	if(isset($user['errors'])) {
+		$error = $user['errors'][0]['message'];
+		$view = 'error';
+		break;
+	}
 	$tweets = Controller::home();
+	if(isset($tweets['errors'])) {
+		$error = $tweets['errors'][0]['message'];
+		$view = 'error';
+		break;
+	}
 } else {
 	switch ($_GET['action']) {
 		case 'profile':
@@ -27,11 +37,16 @@ if (!isset($_GET['action'])) {
 			}
 			$view = 'profile';
 			$user = Controller::profile($_GET['name']);
-			if($user['message'] == "Rate limit exceeded")
+			if(isset($user['errors'])) {
+				$error = $user['errors'][0]['message'];
 				$view = 'error';
+				break;
+			}
 			$tweets = Controller::tweets($user['id']);
-			if($tweets['message'] == "Rate limit exceeded")
+			if(isset($tweets['errors'])) {
+				$error = $tweets['errors'][0]['message'];
 				$view = 'error';
+			}
 			break;
 		case 'status':
 			if (!isset($_GET['content'])) {
@@ -41,6 +56,19 @@ if (!isset($_GET['action'])) {
 			$content = $_GET['content'];
 			Controller::tweet($content);
 			header('location: /');
+			break;
+		case 'update_settings':
+			$settings = $_GET;
+			Controller::update_settings($settings);
+			header('location: /?action=settings');
+			break;
+		case 'settings':
+			$view = 'settings';
+			$user = Controller::profile();
+			if(isset($settings['errors'])) {
+				$error = $user['errors'][0]['message'];
+				$view = 'error';
+			}
 			break;
 		/*case 'search':
 			if(!isset($_GET['q'])) {
@@ -56,11 +84,16 @@ if (!isset($_GET['action'])) {
 		default:
 			$view = 'profile';
 			$user = Controller::profile();
-			if($user['message'] == "Rate limit exceeded")
+			if(isset($user['errors'])) {
+				$error = $user['errors'][0]['message'];
 				$view = 'error';
+				break;
+			}
 			$tweets = Controller::home();
-			if($tweets['message'] == "Rate limit exceeded")
+			if(isset($tweets['errors'])) {
+				$error = $tweets['errors'][0]['message'];
 				$view = 'error';
+			}
 			break;
 	}
 }

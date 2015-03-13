@@ -19,6 +19,23 @@ class Controller
 		return TwitterAPI::query($tweets, 'GET', $field);
 	}
 
+	public static function update_settings($settings) {
+		$keys = array('name', 'url', 'location', 'description');
+		$field = '?';
+		foreach($keys as $key) {
+			if(isset($settings[$key]) && !empty($settings[$key]))
+				$field .= $key.'='.$settings[$key].'&';
+		}
+		$field .= 'skip_status=1';
+		$settings = "https://api.twitter.com/1.1/account/update_profile.json";
+		TwitterAPI::query($settings, 'POST', $field);
+	}
+
+	public static function settings() {
+		$settings = "https://api.twitter.com/1.1/account/settings.json";
+		return TwitterAPI::query($settings, 'GET', "");
+	}
+
 	public static function tweets($userID)
 	{
 		$tweets = "https://api.twitter.com/1.1/statuses/user_timeline.json";

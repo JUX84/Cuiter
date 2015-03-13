@@ -2,7 +2,8 @@
      style="
 	     background: url(<?= $user['profile_background_image_url'] ?>) no-repeat;
 	     background-color: #<?= $user['profile_background_color'] ?>;
-	     color: white;
+		 color: white;
+		text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;
 	     ">
 	<?php
 	if (isset($user['profile_image_url']) && !empty($user['profile_image_url'])) {

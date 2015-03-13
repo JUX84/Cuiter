@@ -38,8 +38,10 @@ class TwitterAPI
 		$explodedFields = explode('&', substr($fields, 1));
 		$fieldsArray = array();
 		foreach ($explodedFields as $field) {
-			$explodedField = explode('=', $field);
-			$fieldsArray[$explodedField[0]] = $explodedField[1];
+			if(!empty($field)) {
+				$explodedField = explode('=', $field);
+				$fieldsArray[$explodedField[0]] = $explodedField[1];
+			}
 		}
 		if ($method == "GET")
 			$oauth += $fieldsArray;
@@ -69,7 +71,7 @@ class TwitterAPI
 		curl_setopt_array($curl, $options);
 		$json = curl_exec($curl);
 		curl_close($curl);
-
+		
 		return json_decode($json, true);
 	}
 }

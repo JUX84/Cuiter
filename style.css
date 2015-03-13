@@ -114,6 +114,29 @@ body {
 	padding: 10px;
 }
 
+.settingsdiv {
+	padding: 5px;
+	margin-top: 10px;
+	border: 1px solid rgba(0, 0, 0, .1);
+	border-radius: 10px;
+}
+
+.settingsinput {
+	text-align: center;
+}
+
+.settings {
+	padding: 10px;
+	background-color: white;
+	border: 1px solid rgba(47, 194, 239, 1);
+	border-radius: 10px;
+	transition: background-color .2s ease-in;
+}
+
+.settings:hover {
+	background-color: rgba(47, 194, 239, .1);
+}
+
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
 	/* Remove the padding we set earlier */
