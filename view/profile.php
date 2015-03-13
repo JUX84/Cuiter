@@ -48,9 +48,6 @@
 <?php
 			}
 	foreach ($tweets as $tweet) {
-		/*echo '<pre>';
-		var_dump($tweet);
-		echo '</pre>';*/
 		$class = '';
 		$rt = $tweet['retweeted'];
 		$fav = $tweet['favorited'];
@@ -62,6 +59,7 @@
 			<h4><img style="padding-right: 10px;" src="<?= $tweet['user']['profile_image_url'] ?>" /><a href="/?action=profile&name=<?= $tweet['user']['screen_name'] ?>"><?= $tweet['user']['name'] ?></a>
 				<span class="date">(<?= date('d/m/Y, H:i:s', strtotime($tweet['created_at'])) ?>)</span></h4>
 			<p<?= $class ?>><?= Controller::processTweet($tweet) ?></p>
+			<p style="margin-left: 20px;"><img src="resource/rt.png" width="16px" /> <strong style="text-decoration: underline;">[<?= $tweet['retweet_count'] ?>]</strong><?= $rt ? '' : ' <a href="#"><strong style="margin-right: 20px;">Retweet</strong></a>' ?> | <img style="margin-left: 20px;" src="resource/fav.png" width="16px" /> <a href="#"><strong><?= $fav ? 'Unfavorite' : 'Favorite' ?></strong></a></p>
 		<?php
 		}
 		?>

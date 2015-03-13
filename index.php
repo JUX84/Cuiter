@@ -23,17 +23,28 @@ if (!isset($_GET['action'])) {
 		case 'profile':
 			if (!isset($_GET['name'])) {
 				$view = 'error';
-				$error = "URI seems wrong...";
 				break;
 			}
 			$view = 'profile';
 			$user = Controller::profile($_GET['name']);
+			if($user['message'] == "Rate limit exceeded")
+				$view = 'error';
 			$tweets = Controller::tweets($user['id']);
+			if($tweets['message'] == "Rate limit exceeded")
+				$view = 'error';
+			break;
+		case 'status':
+			if (!isset($_GET['content'])) {
+				$view = 'error';
+				break;
+			}
+			$content = $_GET['content'];
+			Controller::tweet($content);
+			header('location: /');
 			break;
 		/*case 'search':
 			if(!isset($_GET['q'])) {
 				$view = 'error';
-				$error = "URI seems wrong...";
 				break;
 			}
 			$view = 'search';
@@ -45,7 +56,11 @@ if (!isset($_GET['action'])) {
 		default:
 			$view = 'profile';
 			$user = Controller::profile();
+			if($user['message'] == "Rate limit exceeded")
+				$view = 'error';
 			$tweets = Controller::home();
+			if($tweets['message'] == "Rate limit exceeded")
+				$view = 'error';
 			break;
 	}
 }

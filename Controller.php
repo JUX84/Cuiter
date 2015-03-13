@@ -26,6 +26,12 @@ class Controller
 		return TwitterAPI::query($tweets, 'GET', $field);
 	}
 
+	public static function tweet($status) {
+		$tweet = "https://api.twitter.com/1.1/statuses/update.json";
+		$field = "?status=$status";
+		TwitterAPI::query($tweet, 'POST', $field);
+	}
+
 	public static function search($query, $type)
 	{
 	}
