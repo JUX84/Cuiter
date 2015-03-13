@@ -60,14 +60,14 @@ class Controller
 		$text = preg_replace_callback(
 			'/@[A-Z0-9_]*/i',
 			function ($matches) {
-				return '<a href="/?action=profile&name=' . substr($matches[0], 1) . '">' . $matches[0] . '</a>';
+				return '<a href="?action=profile&name=' . substr($matches[0], 1) . '">' . $matches[0] . '</a>';
 			},
 			$text
 		);
 		$text = preg_replace_callback(
 			'/#[A-Z0-9_]*/i',
 			function ($matches) {
-				return '<a href="/?tag=' . substr($matches[0], 1) . '">' . $matches[0] . '</a>';
+				return '<a href="?tag=' . substr($matches[0], 1) . '">' . $matches[0] . '</a>';
 			},
 			$text
 		);

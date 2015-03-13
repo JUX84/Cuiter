@@ -14,7 +14,7 @@
 	?>
 	<h1><?= $user['name'] ?></h1>
 
-	<h3><a href="/?name=<?= $user['screen_name'] ?>">@<?= $user['screen_name'] ?></a></h3>
+	<h3><a href="?name=<?= $user['screen_name'] ?>">@<?= $user['screen_name'] ?></a></h3>
 	<?php
 	if (isset($user['description']) && !empty($user['description'])) {
 		?>
@@ -57,7 +57,7 @@
 		else if ($rt)
 			$class = ' class="retweet"';
 		?>
-			<h4><img style="padding-right: 10px;" src="<?= $tweet['user']['profile_image_url'] ?>" /><a href="/?action=profile&name=<?= $tweet['user']['screen_name'] ?>"><?= $tweet['user']['name'] ?></a>
+			<h4><img style="padding-right: 10px;" src="<?= $tweet['user']['profile_image_url'] ?>" /><a href="?action=profile&name=<?= $tweet['user']['screen_name'] ?>"><?= $tweet['user']['name'] ?></a>
 				<span class="date">(<?= date('d/m/Y, H:i:s', strtotime($tweet['created_at'])) ?>)</span></h4>
 			<p<?= $class ?>><?= Controller::processTweet($tweet) ?></p>
 			<p style="margin-left: 20px;"><img src="resource/rt.png" width="16px" /> <strong style="text-decoration: underline;">[<?= $tweet['retweet_count'] ?>]</strong><?= $rt ? '' : ' <a href="#"><strong style="margin-right: 20px;">Retweet</strong></a>' ?> | <img style="margin-left: 20px;" src="resource/fav.png" width="16px" /> <a href="#"><strong><?= $fav ? 'Unfavorite' : 'Favorite' ?></strong></a></p>

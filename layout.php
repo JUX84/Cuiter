@@ -22,12 +22,12 @@
 	<div class="header">
 		<nav>
 			<ul class="nav nav-pills pull-right">
-			<li role="presentation"<?= (($view == 'profile' && $user['id'] == TwitterAPI::getUserID())) ? 'class="active"' : '' ?>><a href="/">Home</a></li>
+			<li role="presentation"<?= (($view == 'profile' && $user['id'] == TwitterAPI::getUserID())) ? 'class="active"' : '' ?>><a href="?">Home</a></li>
 				<li role="presentation">
 					<form method="get"><input type="hidden" name="action" value="search"/><input
 							class="search" type="text" name="q" placeholder="Search (WIP)" disabled/></form>
 				</li>
-				<li role="presentation"<?= ($view == 'settings') ? ' class="active"' : '' ?>><a href="/?action=settings">Settings</a></li>
+				<li role="presentation"<?= ($view == 'settings') ? ' class="active"' : '' ?>><a href="?action=settings">Settings</a></li>
 			</ul>
 		</nav>
 		<h3 class="text-muted">Cuiter</h3>

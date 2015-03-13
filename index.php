@@ -60,7 +60,7 @@ if (!isset($_GET['action'])) {
 		case 'update_settings':
 			$settings = $_GET;
 			Controller::update_settings($settings);
-			header('location: /?action=settings');
+			header('location: ?action=settings');
 			break;
 		case 'settings':
 			$view = 'settings';
