@@ -3,24 +3,9 @@
 </div>
 
 <?php
-
-	function showSetting($key, $value) {
-		if (is_bool($value))
-			$value = ($value ? 'true' : 'false');
-		if ($key == 'screen_name')
-			$value = '<input style="text-align:center;" type="text" name="screen_name" placeholder="'.$value.'" />';
-		else if ($key == 'language')
-			$value = '<select name="language">
-						<option value="fr"'.($value == 'fr' ? ' selected' : '').'>
-							Francais
-						</option>
-						<option value="en"'.($value == 'en' ? ' selected' : '').'>
-							English
-						</option>
-					</select>';
-		return $value;
-	}
-
+	$url = '';
+	if(isset($user['entities']['url']['urls'][0]['expanded_url']))
+		$url = $user['entities']['url']['urls'][0]['expanded_url'];
 ?>
 
 <div class="row marketing">
@@ -34,7 +19,7 @@
 			</div>
 			<div class="settingsdiv">
 				<h4>URL</h4>
-				<input class="settingsinput" type="text" name="url" placeholder="<?= $user['entities']['url']['urls'][0]['expanded_url'] ?>" />
+				<input class="settingsinput" type="text" name="url" placeholder="<?= $url ?>" />
 			</div>
 			<div class="settingsdiv">
 				<h4>Location</h4>
